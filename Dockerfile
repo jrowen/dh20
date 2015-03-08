@@ -25,7 +25,7 @@ RUN \
 # Define commonly used JAVA_HOME variable
 ENV JAVA_HOME /usr/lib/jvm/java-7-oracle
 
-# Fetch h2o mirzakhani
+# Fetch h2o
 RUN \
   wget http://h2o-release.s3.amazonaws.com/h2o/rel-noether/4/h2o-2.8.4.4.zip -O /opt/h2o.zip && \
   unzip -d /opt /opt/h2o.zip && \
@@ -39,15 +39,15 @@ RUN \
 EXPOSE 54321
 EXPOSE 54322
 
-# install caret related packages
+# install h2o related packages
 RUN install2.r --error \
-    RCurl \
     rjson \
     statmod \
     survival \
-    stats \
-    tools \
-    utils \
-    methods \
-    h2o \
+    h2o 
 && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
+
+RUN R -e "library(h2o); localH2O = h2o.init()"
+# RUN R -e "install.packages("/opt/h2o-2.8.4.4/R/h2o_2.8.4.4.tar.gz", repos = NULL, type = "source")"
+
+

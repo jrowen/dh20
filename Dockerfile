@@ -10,12 +10,10 @@ RUN \
   apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EEA14886  && \
   apt-get update  && \
   \
-  \
   echo "===> install Java"  && \
   echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections  && \
   echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections  && \
   DEBIAN_FRONTEND=noninteractive  apt-get install -y --force-yes oracle-java7-installer oracle-java7-set-default  && \
-  \
   \
   echo "===> clean up..."  && \
   rm -rf /var/cache/oracle-jdk7-installer  && \
@@ -26,6 +24,7 @@ RUN \
 ENV JAVA_HOME /usr/lib/jvm/java-7-oracle
 
 # Fetch h2o
+# http://0xdata.com/blog/2015/01/h2o-docker/
 RUN \
   wget http://h2o-release.s3.amazonaws.com/h2o/rel-noether/4/h2o-2.8.4.4.zip -O /opt/h2o.zip && \
   unzip -d /opt /opt/h2o.zip && \
@@ -48,6 +47,5 @@ RUN install2.r --error \
 && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
 
 RUN R -e "library(h2o); localH2O = h2o.init()"
-# RUN R -e "install.packages("/opt/h2o-2.8.4.4/R/h2o_2.8.4.4.tar.gz", repos = NULL, type = "source")"
 
 

@@ -45,7 +45,7 @@ RUN install2.r --error \
     survival
 && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
 
-R -e "install.packages('h2o', type='source', repos=(c('http://h2o-release.s3.amazonaws.com/h2o/rel-nunes/2/R')))"
+RUN R -e "install.packages('h2o', type='source', repos=(c('http://h2o-release.s3.amazonaws.com/h2o/rel-nunes/2/R')))"
 RUN R -e "library(h2o); localH2O = h2o.init()"
 
 

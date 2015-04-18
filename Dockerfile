@@ -26,7 +26,7 @@ ENV JAVA_HOME /usr/lib/jvm/java-7-oracle
 # Fetch h2o
 # http://0xdata.com/blog/2015/01/h2o-docker/
 RUN \
-  wget http://h2o-release.s3.amazonaws.com/h2o/rel-noether/4/h2o-2.8.4.4.zip -O /opt/h2o.zip && \
+  wget http://h2o-release.s3.amazonaws.com/h2o/rel-nunes/2/h2o-2.8.6.2.zip -O /opt/h2o.zip && \
   unzip -d /opt /opt/h2o.zip && \
   rm /opt/h2o.zip && \
   cd /opt && \
@@ -45,7 +45,7 @@ RUN install2.r --error \
     survival
 && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
 
-R -e "install.packages('h2o', type='source', repos=(c('http://h2o-release.s3.amazonaws.com/h2o/rel-noether/4/R')))"
+R -e "install.packages('h2o', type='source', repos=(c('http://h2o-release.s3.amazonaws.com/h2o/rel-nunes/2/R')))"
 RUN R -e "library(h2o); localH2O = h2o.init()"
 
 
